@@ -27,3 +27,10 @@
 *.exe
 *.out
 *.app
+
+#Vita specific files
+eboot.bin
+param.sfo
+*.elf
+*.velf
+*.vpk
