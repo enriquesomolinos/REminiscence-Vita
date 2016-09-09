@@ -1,0 +1,94 @@
+# Project: Reminiscence32
+# Makefile created by Dev-C++ 5.11
+
+CPP      = g++.exe
+CC       = gcc.exe
+WINDRES  = windres.exe
+OBJ      = collision.o cutscene.o file.o fs.o game.o graphics.o locale.o main.o menu.o mixer.o mod_player.o ogg_player.o piege.o resource.o resource_aba.o scaler.o seq_player.o sfx_player.o staticres.o systemstub_sdl.o unpack.o util.o video.o
+LINKOBJ  = collision.o cutscene.o file.o fs.o game.o graphics.o locale.o main.o menu.o mixer.o mod_player.o ogg_player.o piege.o resource.o resource_aba.o scaler.o seq_player.o sfx_player.o staticres.o systemstub_sdl.o unpack.o util.o video.o
+LIBS     = -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib" -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib" -static-libgcc lib/SDL2.dll
+INCS     = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include" -I"E:/psvita/sdk/PSDK3v3-master/PSDK3v3-master/MinGW/msys/1.0/home/esomolinos/REminiscence-0.3.2/SDL2-2.0.4/include"
+CXXINCS  = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include/c++" -I"E:/psvita/sdk/PSDK3v3-master/PSDK3v3-master/MinGW/msys/1.0/home/esomolinos/REminiscence-0.3.2/SDL2-2.0.4/include"
+BIN      = Reminiscence32.exe
+CXXFLAGS = $(CXXINCS) 
+CFLAGS   = $(INCS) 
+RM       = rm.exe -f
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before $(BIN) all-after
+
+clean: clean-custom
+	${RM} $(OBJ) $(BIN)
+
+$(BIN): $(OBJ)
+	$(CPP) $(LINKOBJ) -o $(BIN) $(LIBS)
+
+collision.o: collision.cpp
+	$(CPP) -c collision.cpp -o collision.o $(CXXFLAGS)
+
+cutscene.o: cutscene.cpp
+	$(CPP) -c cutscene.cpp -o cutscene.o $(CXXFLAGS)
+
+file.o: file.cpp
+	$(CPP) -c file.cpp -o file.o $(CXXFLAGS)
+
+fs.o: fs.cpp
+	$(CPP) -c fs.cpp -o fs.o $(CXXFLAGS)
+
+game.o: game.cpp
+	$(CPP) -c game.cpp -o game.o $(CXXFLAGS)
+
+graphics.o: graphics.cpp
+	$(CPP) -c graphics.cpp -o graphics.o $(CXXFLAGS)
+
+locale.o: locale.cpp
+	$(CPP) -c locale.cpp -o locale.o $(CXXFLAGS)
+
+main.o: main.cpp
+	$(CPP) -c main.cpp -o main.o $(CXXFLAGS)
+
+menu.o: menu.cpp
+	$(CPP) -c menu.cpp -o menu.o $(CXXFLAGS)
+
+mixer.o: mixer.cpp
+	$(CPP) -c mixer.cpp -o mixer.o $(CXXFLAGS)
+
+mod_player.o: mod_player.cpp
+	$(CPP) -c mod_player.cpp -o mod_player.o $(CXXFLAGS)
+
+ogg_player.o: ogg_player.cpp
+	$(CPP) -c ogg_player.cpp -o ogg_player.o $(CXXFLAGS)
+
+piege.o: piege.cpp
+	$(CPP) -c piege.cpp -o piege.o $(CXXFLAGS)
+
+resource.o: resource.cpp
+	$(CPP) -c resource.cpp -o resource.o $(CXXFLAGS)
+
+resource_aba.o: resource_aba.cpp
+	$(CPP) -c resource_aba.cpp -o resource_aba.o $(CXXFLAGS)
+
+scaler.o: scaler.cpp
+	$(CPP) -c scaler.cpp -o scaler.o $(CXXFLAGS)
+
+seq_player.o: seq_player.cpp
+	$(CPP) -c seq_player.cpp -o seq_player.o $(CXXFLAGS)
+
+sfx_player.o: sfx_player.cpp
+	$(CPP) -c sfx_player.cpp -o sfx_player.o $(CXXFLAGS)
+
+staticres.o: staticres.cpp
+	$(CPP) -c staticres.cpp -o staticres.o $(CXXFLAGS)
+
+systemstub_sdl.o: systemstub_sdl.cpp
+	$(CPP) -c systemstub_sdl.cpp -o systemstub_sdl.o $(CXXFLAGS)
+
+unpack.o: unpack.cpp
+	$(CPP) -c unpack.cpp -o unpack.o $(CXXFLAGS)
+
+util.o: util.cpp
+	$(CPP) -c util.cpp -o util.o $(CXXFLAGS)
+
+video.o: video.cpp
+	$(CPP) -c video.cpp -o video.o $(CXXFLAGS)

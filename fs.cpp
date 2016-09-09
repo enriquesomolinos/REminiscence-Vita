@@ -119,23 +119,25 @@ void FileSystem_impl::getPathListFromDirectory(const char *dir) {
 }
 #else
 	#ifdef PSVITA
-	
 	void FileSystem_impl::getPathListFromDirectory(const char *dir) {
 		SceUID d = sceIoDopen(dir);
-		if (d) {
-			SceIoDirent *de = NULL;
+		
+		if (d) {		
+			SceIoDirent de;
+			memset(&de, 0, sizeof(de));	
 			
-			while ((sceIoDread(d,de))>=0) {
-				if (de->d_name[0] == '.') {
+			
+			while (sceIoDread(d,&de)>0) {
+				if (de.d_name[0] == '.') {
 					continue;
 				}
 				char filePath[MAXPATHLEN];
-				snprintf(filePath, sizeof(filePath), "%s/%s", dir, de->d_name);
-				SceIoStat st =de->d_stat;			
+				snprintf(filePath, sizeof(filePath), "%s/%s", dir, de.d_name);
+				SceIoStat st =de.d_stat;			
 					if (st.st_attr ==SCE_SO_IFDIR) {
 						getPathListFromDirectory(filePath);
 					} else {
-						addPath(dir, de->d_name);
+						addPath(dir, de.d_name);
 					}
 				
 			}

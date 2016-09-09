@@ -14,6 +14,12 @@
 #include "systemstub.h"
 #include "util.h"
 
+
+#ifdef PSVITA
+	#include <psp2/power.h>
+	#include <psp2/kernel/processmgr.h>
+	#include <psp2/io/fcntl.h>
+#endif
 static const char *USAGE =
 	"REminiscence - Flashback Interpreter\n"
 	"Usage: %s [OPTIONS]...\n"
@@ -80,7 +86,12 @@ static void initOptions() {
 	g_options.bypass_protection = true;
 	g_options.play_disabled_cutscenes = false;
 	g_options.enable_password_menu = false;
-	g_options.fade_out_palette = true;
+	#ifdef PSVITA
+		g_options.fade_out_palette = true;
+	#else
+		g_options.fade_out_palette = true;
+	#endif
+	
 	g_options.use_text_cutscenes = false;
 	// read configuration file
 	struct {
@@ -128,8 +139,16 @@ static const int DEFAULT_SCALER = SCALER_SCALE_3X;
 
 #undef main
 int main(int argc, char *argv[]) {
-	const char *dataPath = "DATA";
-	const char *savePath = ".";
+
+	#ifdef PSVITA
+		sceKernelPowerTick(SCE_KERNEL_POWER_TICK_DISABLE_AUTO_SUSPEND);
+	scePowerSetArmClockFrequency(444);
+	const char *dataPath = "ux0:app/REminisce/DATA";
+	const char *savePath = "ux0:app/REminisce/SAVE";
+	#else
+		const char *dataPath = "DATA";
+		const char *savePath = ".";
+	#endif	
 	int levelNum = 0;
 	int scaler = DEFAULT_SCALER;
 	bool fullscreen = false;

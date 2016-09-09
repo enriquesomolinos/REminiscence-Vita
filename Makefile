@@ -1,6 +1,6 @@
-TARGET = REminVITA
-TITLE_ID = Reminvita
-PSVITAIP = 192.168.0.199
+TARGET = REminisce
+TITLE_ID = REminisce
+PSVITAIP = 192.168.0.201
 SRCS = \
 	main.cpp collision.cpp cutscene.cpp file.cpp fs.cpp game.cpp graphics.cpp  menu.cpp \
 	mixer.cpp mod_player.cpp piege.cpp resource.cpp scaler.cpp seq_player.cpp sfx_player.cpp \
@@ -13,32 +13,35 @@ INCDIR =-I/include -I/local/vitasdk/$(PREFIX)/include/vita2d  -I/local/vitasdk/$
 
 SDL_CFLAGS = `sdl-config --cflags`
 SDL_LIBS = `sdl-config --libs`
-OLDLIBS=-lSceAppMgr_stub -lSceAppUtil_stub -lSceCommonDialog_stub -lSceIme_stub -lSceKernel_stub -lScePower_stub -lScePgf_stub -lSceAudiodec_stub -lSceTouch_stub 
-LIBS +=  -lstdc++  -lSDL2 -lvita2d  -lpng -ljpeg -lz -lm -lc \
-	     -lSceGxm_stub -lSceDisplay_stub -lSceCtrl_stub -lSceAudio_stub \
-		 -lSceSysmodule_stub
 
+LIBS +=  -lSDL2  -lvita2d \
+	     -lSceKernel_stub -lSceGxm_stub -lSceDisplay_stub -lSceCtrl_stub -lSceAudio_stub \
+		 -lSceSysmodule_stub -lScePgf_stub -lSceCommonDialog_stub \
+		 -lScePower_stub -lfreetype -lpng -ljpeg -lz -lm -lc
+		 
 PREFIX   = arm-vita-eabi
 CC       = $(PREFIX)-gcc
 CXX      = $(PREFIX)-g++
-CFLAGS   =  $(INCDIR)   -Wl,-q -Wall -O3  -Wno-unused-variable -Wno-unused-but-set-variable -DPSVITA
-CXXFLAGS = $(CFLAGS) -std=c++11 -fno-rtti -fno-exceptions 
+CFLAGS   =  $(INCDIR) -fpermissive  -Wl,-q -Wall -O3  -Wno-unused-variable -Wno-unused-but-set-variable -DPSVITA
+CXXFLAGS = $(CFLAGS)  -std=c++11
 ASFLAGS  = $(CFLAGS)
 
 
 all: $(TARGET).vpk
 
 %.vpk: eboot.bin
-	vita-mksfoex -d PARENTAL_LEVEL=1 -s APP_VER=00.32 -s TITLE_ID=$(TITLE_ID) "$(TARGET)" param.sfo
+	vita-mksfoex  -s TITLE_ID=$(TITLE_ID) "$(TARGET)" param.sfo
 	vita-pack-vpk -s param.sfo -b eboot.bin \
 		--add pkg/sce_sys/icon0.png=sce_sys/icon0.png \
 		--add pkg/sce_sys/livearea/contents/bg.png=sce_sys/livearea/contents/bg.png \
 		--add pkg/sce_sys/livearea/contents/startup.png=sce_sys/livearea/contents/startup.png \
 		--add pkg/sce_sys/livearea/contents/template.xml=sce_sys/livearea/contents/template.xml \
+		--add DATA/readme.txt=DATA/readme.txt \
+		--add SAVE/readme.txt=SAVE/readme.txt \
 	$(TARGET).vpk
 	
 eboot.bin: $(TARGET).velf
-	vita-make-fself $(TARGET).velf eboot.bin
+	vita-make-fself $< $@
 	
 %.velf: %.elf	
 	vita-elf-create $< $@
@@ -51,6 +54,9 @@ $(TARGET).elf: $(OBJS)
 %.o: %.txt
 	$(PREFIX)-ld -r -b binary -o $@ $^
 
+%.o : %.cpp
+	$(CXX) -c $(CXXFLAGS) -o $@ $<
+	
 	
 vpksend: $(TARGET).vpk
 	curl -T $(TARGET).vpk ftp://$(PSVITAIP):1337/ux0:/

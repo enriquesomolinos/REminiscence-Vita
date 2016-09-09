@@ -34,3 +34,4 @@ param.sfo
 *.elf
 *.velf
 *.vpk
+/.project
