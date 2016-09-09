@@ -2,6 +2,7 @@
 /*
  * REminiscence - Flashback interpreter
  * Copyright (C) 2005-2015 Gregory Montoir (cyx@users.sourceforge.net)
+ * Vita version by Enrique Somolinos (https://github.com/enriquesomolinos) 
  */
 
 #ifndef SEQ_PLAYER_H__
