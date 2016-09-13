@@ -1,6 +1,6 @@
-TARGET = REminisce
-TITLE_ID = REminisce
-PSVITAIP = 192.168.0.201
+TARGET = REminiscence
+TITLE_ID = SOMO00001
+PSVITAIP = 192.168.0.199
 SRCS = \
 	main.cpp collision.cpp cutscene.cpp file.cpp fs.cpp game.cpp graphics.cpp  menu.cpp \
 	mixer.cpp mod_player.cpp piege.cpp resource.cpp scaler.cpp seq_player.cpp sfx_player.cpp \
