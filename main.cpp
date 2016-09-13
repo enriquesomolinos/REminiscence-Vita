@@ -136,16 +136,16 @@ static void initOptions() {
 	}
 }
 
-static const int DEFAULT_SCALER = SCALER_SCALE_3X;
+static const int DEFAULT_SCALER = SCALER_POINT_2X;
 
 #undef main
 int main(int argc, char *argv[]) {
 
 	#ifdef PSVITA
 		sceKernelPowerTick(SCE_KERNEL_POWER_TICK_DISABLE_AUTO_SUSPEND);
-	scePowerSetArmClockFrequency(444);
-	const char *dataPath = "ux0:app/REminisce/DATA";
-	const char *savePath = "ux0:app/REminisce/SAVE";
+		scePowerSetArmClockFrequency(444);
+	const char *dataPath = "ux0:app/SOMO00001/DATA";
+	const char *savePath = "ux0:app/SOMO00001/SAVE";
 	#else
 		const char *dataPath = "DATA";
 		const char *savePath = ".";
