@@ -1,12 +1,30 @@
 # REminiscence
 REminiscence port for Vita. Based on the 0.3.2. version created by Gregory Montoir.
 
+# Change log
+
+v0.4.0
+---------
+  
+- Eboot.bin is marked as safe.
+  
+- Now, you need to put the original data files in the folder **ux0:data/SOMO00001/DATA**
+  
+v0.3.2
+---------
+  
+- Initial port of Reminiscence game.
+
+- Fix fullscreen mode.
+
+- Fix button mapping
+
 # Requirements
 A Vita system with Henkaku installed to run homebrew.
 
 Install the vpk file in your Vita
 
-Put the original data files in the folder **ux0:app/SOMO00001/DATA**
+Put the original data files in the folder **ux0:data/SOMO00001/DATA**
 
 Original files can be downloaded in serveral sites, for example:
 
