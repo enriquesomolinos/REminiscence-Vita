@@ -20,6 +20,7 @@
 	#include <psp2/power.h>
 	#include <psp2/kernel/processmgr.h>
 	#include <psp2/io/fcntl.h>
+	#include <psp2/io/stat.h>
 #endif
 static const char *USAGE =
 	"REminiscence - Flashback Interpreter\n"
@@ -144,8 +145,14 @@ int main(int argc, char *argv[]) {
 	#ifdef PSVITA
 		sceKernelPowerTick(SCE_KERNEL_POWER_TICK_DISABLE_AUTO_SUSPEND);
 		scePowerSetArmClockFrequency(444);
-	const char *dataPath = "ux0:app/SOMO00001/DATA";
-	const char *savePath = "ux0:app/SOMO00001/SAVE";
+		// Initialze File System Factory
+		sceIoMkdir("ux0:data", 0755);
+		sceIoMkdir("ux0:data/SOMO00001", 0755);
+		sceIoMkdir("ux0:data/SOMO00001/DATA", 0755);
+		sceIoMkdir("ux0:data/SOMO00001/SAVE", 0755);
+		
+		const char *dataPath = "ux0:data/SOMO00001/DATA";
+		const char *savePath = "ux0:data/SOMO00001/SAVE";
 	#else
 		const char *dataPath = "DATA";
 		const char *savePath = ".";
