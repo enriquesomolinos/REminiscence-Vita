@@ -1,3 +1,4 @@
+VERSION = 0.4.0
 TARGET = REminiscence
 TITLE_ID = SOMO00001
 PSVITAIP = 192.168.0.199
@@ -27,7 +28,7 @@ CXXFLAGS = $(CFLAGS)  -std=c++11
 ASFLAGS  = $(CFLAGS)
 
 
-all: $(TARGET).vpk
+all: $(TARGET)-$(VERSION).vpk
 
 %.vpk: eboot.bin
 	vita-mksfoex  -s TITLE_ID=$(TITLE_ID) "$(TARGET)" param.sfo
@@ -36,12 +37,10 @@ all: $(TARGET).vpk
 		--add pkg/sce_sys/livearea/contents/bg.png=sce_sys/livearea/contents/bg.png \
 		--add pkg/sce_sys/livearea/contents/startup.png=sce_sys/livearea/contents/startup.png \
 		--add pkg/sce_sys/livearea/contents/template.xml=sce_sys/livearea/contents/template.xml \
-		--add DATA/readme.txt=DATA/readme.txt \
-		--add SAVE/readme.txt=SAVE/readme.txt \
-	$(TARGET).vpk
+	$(TARGET)-$(VERSION).vpk
 	
 eboot.bin: $(TARGET).velf
-	vita-make-fself $< $@
+	vita-make-fself -s $< $@
 	
 %.velf: %.elf	
 	vita-elf-create $< $@
@@ -58,12 +57,11 @@ $(TARGET).elf: $(OBJS)
 	$(CXX) -c $(CXXFLAGS) -o $@ $<
 	
 	
-vpksend: $(TARGET).vpk
-	curl -T $(TARGET).vpk ftp://$(PSVITAIP):1337/ux0:/
+vpksend: $(TARGET)-$(VERSION).vpk
+	curl -T $(TARGET)-$(VERSION).vpk ftp://$(PSVITAIP):1337/ux0:/
 	@echo "Sent."
 send: eboot.bin
 	curl -T eboot.bin ftp://$(PSVITAIP):1337/ux0:/app/$(TITLE_ID)/
 	@echo "Sent."
 clean:
-    
-	@rm -rf $(TARGET).velf $(TARGET).elf $(TARGET).vpk eboot.bin param.sfo *.o
+	@rm -rf *.velf *.elf *.vpk eboot.bin param.sfo *.o
