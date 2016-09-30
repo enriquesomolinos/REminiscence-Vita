@@ -10,7 +10,11 @@
 #include "systemstub.h"
 #include "util.h"
 
-static const int kAudioHz = 22050;
+#ifdef PSVITA
+	static const int kAudioHz = 44100;
+#else
+	static const int kAudioHz = 22050;
+#endif
 
 static const int kJoystickIndex = 0;
 static const int kJoystickCommitValue = 3200;
