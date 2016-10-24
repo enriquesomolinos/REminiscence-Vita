@@ -392,7 +392,7 @@ void SystemStub_SDL::processEventVita(const SDL_Event &ev, bool &paused) {
 				}else{
 					if(_midscreen){
 						windowW = 960;
-						windowH = 544;						
+						windowH = 544;
 						_fullscreen =true;
 						_midscreen = false;
 					}else{
@@ -425,6 +425,7 @@ void SystemStub_SDL::processEventVita(const SDL_Event &ev, bool &paused) {
 		{
 			const bool pressed = (ev.jbutton.state == SDL_PRESSED);
 			if (pressed) {
+				_pi.dirMask &= ~PlayerInput::DIR_UP;
 				_pi.dirMask |= PlayerInput::DIR_UP;
 			} else if(ev.jbutton.state==SDL_RELEASED){
 				_pi.dirMask &= ~PlayerInput::DIR_UP;
@@ -435,6 +436,7 @@ void SystemStub_SDL::processEventVita(const SDL_Event &ev, bool &paused) {
 		{
 			const bool pressed = (ev.jbutton.state == SDL_PRESSED);
 			if (pressed) {
+				_pi.dirMask &= ~PlayerInput::DIR_RIGHT;
 				_pi.dirMask |= PlayerInput::DIR_RIGHT;
 			} else if(ev.jbutton.state==SDL_RELEASED){
 				_pi.dirMask &= ~PlayerInput::DIR_RIGHT;
@@ -445,6 +447,7 @@ void SystemStub_SDL::processEventVita(const SDL_Event &ev, bool &paused) {
 		{
 			const bool pressed = (ev.jbutton.state == SDL_PRESSED);
 			if (pressed) {
+				_pi.dirMask &= ~PlayerInput::DIR_DOWN;
 				_pi.dirMask |= PlayerInput::DIR_DOWN;
 			} else if(ev.jbutton.state==SDL_RELEASED){
 				_pi.dirMask &= ~PlayerInput::DIR_DOWN;
@@ -455,6 +458,7 @@ void SystemStub_SDL::processEventVita(const SDL_Event &ev, bool &paused) {
 		{
 			const bool pressed = (ev.jbutton.state == SDL_PRESSED);
 			if (pressed) {
+				_pi.dirMask &= ~PlayerInput::DIR_LEFT;
 				_pi.dirMask |= PlayerInput::DIR_LEFT;
 			} else if(ev.jbutton.state==SDL_RELEASED){
 				_pi.dirMask &= ~PlayerInput::DIR_LEFT;
